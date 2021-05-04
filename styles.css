@@ -1,0 +1,43 @@
+img {
+    margin: 0 auto;
+}
+
+.cards {
+    margin: 0 auto;
+    width: 70%;
+    display: grid;
+    grid-template-columns: 20% 20% 20% 20%;
+    grid-gap: 5%;
+}
+
+.card {
+    height: 150px;
+    width: 150px;
+    margin: 10px;
+    background-color: rgba(0, 255, 0, 1.0);
+}
+
+.animal {
+    display: none;
+}
+
+.animalOn {
+    height: 150px;
+    width: auto;
+    display: inline;
+}
+
+.correctAnimal {
+    height: 150px;
+    width: auto;
+    display: inline;
+    background-color: white;
+    pointer-events: none;
+}
+
+.unclick {
+    pointer-events: none;
+}
+
+/* To do:
+centre images
