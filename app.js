@@ -1,15 +1,36 @@
-const card = document.querySelectorAll('.card');
 const animal = document.querySelectorAll('.animal');
 const score = document.querySelector('.score');
 const attempt = document.querySelector('.attempt');
 const display = document.querySelector('.guessDisplay');
-const cardsHolder = document.querySelector('.cards');
 const levels = document.querySelector('#levels');
+const cardsDiv = document.querySelector('.cards');
 const select = document.querySelector('select');
 
 let guessArr = [];
 let playerScore = 0;
 let playerAttempt = 0;
+
+//Listen for level changes
+select.addEventListener('change', function(){
+    clearCurrLevel();
+    levelSelect(levels);
+})
+//Listen for clicks on added cards - !IN PROGRESS!
+cardsDiv.addEventListener('click', function(event){
+    event.target.classList.toggle('animalOn');
+    event.target.classList.toggle('card');
+    event.target.parentElement.classList.toggle('unclick');
+    console.log(event);
+    console.log(event.target);
+    alert('works');
+})
+
+//Clears current level cards
+const clearCurrLevel = () => {
+    while(cardsDiv.childNodes.length >= 1){
+        cardsDiv.removeChild(cardsDiv.firstChild);
+    }
+}
 
 //loop through array randomly and set attribute of .animal
 const imgArr = ['bear.png', 
@@ -34,12 +55,6 @@ let shuffle = (arr) => {
         arr[j] = temp;
     }
 }
-
-//Use randomised nums array to set the img path of a random animal
-// for(let i = 0; i < nums.length; i++){
-//     let randImg = nums[i];
-//     animal[i].setAttribute('src', `img/${imgArr[randImg]}`);
-// };
 
 //Check the two cards when both answers are added to the array
 const answerCheck = () => {
@@ -93,30 +108,47 @@ const cardReset = () => {
 //make the divs depending on which level is selected
 //Use .slice to create an array
 //Change the level1,2,3 etc to an object?
-
+//Find a way to add an eventlistener 
+//seperate functions into different file
 
 const levelSelect = (lvlSelect) => {
     if(lvlSelect.value === '1'){
         level1();
     } else if (lvlSelect.value === '2'){
-        console.log('level 2');
+        level2();
     } else if (lvlSelect.value === '3'){
-        console.log('level 3');
+        level3();
     } else {
-        console.log('level 4');
+        level4();
     }
 }
-
-select.addEventListener('change', function(){
-    levelSelect(levels);
-})
 
 const level1 = () => {
     const lvl1arr = nums.slice(0,4);
     const lvl1img = imgArr.slice(0,4);
     shuffle(lvl1arr);
     createCards(lvl1arr, lvl1img);
-    listenOnCards();
+}
+
+const level2 = () => {
+    const lvl2arr = nums.slice(0,6);
+    const lvl2img = imgArr.slice(0,6);
+    shuffle(lvl2arr);
+    createCards(lvl2arr, lvl2img);
+}
+
+const level3 = () => {
+    const lvl3arr = nums.slice(0, 10);
+    const lvl3img = imgArr.slice(0, 10);
+    shuffle(lvl3arr);
+    createCards(lvl3arr, lvl3img);
+}
+
+const level4 = () => {
+    const lvl4arr = nums;
+    const lvl4img = imgArr;
+    shuffle(lvl4arr);
+    createCards(lvl4arr, lvl4img);
 }
 
 const createCards = (numarr, imgarr) => {
@@ -128,23 +160,10 @@ const createCards = (numarr, imgarr) => {
         let randImg = numarr[i];
         img.setAttribute('src', `img/${imgarr[randImg]}`);
         div.append(img);
-        cardsHolder.append(div);
+        cardsDiv.append(div);
     }
 };
 
-let cardsInHolder = cardsHolder.childNodes;
 
-//Adds an event listener to each card
-//TO DO: SORT THIS LISTENER OUT?! Pass in imgarrays as params
-const listenOnCards = () => {
-    for(let i = 1; i <= cardsInHolder.length; i++){
-        cardsInHolder[i].addEventListener('click', function(){
-            // cardsInHolder[i].classList.toggle('card');
-            // animal[i].classList.toggle('animalOn');
-            // animal[i].parentElement.classList.toggle('unclick');
-            // guessArr.push(animal[i]);
-            // answerCheck();
-            alert('works');
-        })
-    };
-}
+
+
