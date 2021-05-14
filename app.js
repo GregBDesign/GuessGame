@@ -1,4 +1,3 @@
-const animal = document.querySelectorAll('.animal');
 const score = document.querySelector('.score');
 const attempt = document.querySelector('.attempt');
 const display = document.querySelector('.guessDisplay');
@@ -15,15 +14,6 @@ select.addEventListener('change', function(){
     clearCurrLevel();
     levelSelect(levels);
 })
-//Listen for clicks on added cards - !IN PROGRESS!
-cardsDiv.addEventListener('click', function(event){
-    event.target.classList.toggle('animalOn');
-    event.target.classList.toggle('card');
-    event.target.parentElement.classList.toggle('unclick');
-    console.log(event);
-    console.log(event.target);
-    alert('works');
-})
 
 //Clears current level cards
 const clearCurrLevel = () => {
@@ -32,7 +22,7 @@ const clearCurrLevel = () => {
     }
 }
 
-//loop through array randomly and set attribute of .animal
+//loop through array randomly and set attribute of animals
 const imgArr = ['bear.png', 
                 'bear.png', 
                 'deer.png', 
@@ -111,6 +101,25 @@ const cardReset = () => {
 //Find a way to add an eventlistener 
 //seperate functions into different file
 
+//Level 1 loaded as the default when page opens
+// window.onload = level1();
+
+const card = document.querySelectorAll('.card');
+const animal = document.querySelectorAll('.animal');
+
+const createCards = (numarr, imgarr) => {
+    for(let i = 0; i < numarr.length; i++){
+        const div = document.createElement('div');
+        div.classList.add('card');
+        const img = document.createElement('img');
+        img.classList.add('animal');
+        let randImg = numarr[i];
+        img.setAttribute('src', `img/${imgarr[randImg]}`);
+        div.append(img);
+        cardsDiv.append(div);
+    }
+};
+
 const levelSelect = (lvlSelect) => {
     if(lvlSelect.value === '1'){
         level1();
@@ -151,19 +160,12 @@ const level4 = () => {
     createCards(lvl4arr, lvl4img);
 }
 
-const createCards = (numarr, imgarr) => {
-    for(let i = 0; i < numarr.length; i++){
-        const div = document.createElement('div');
-        div.classList.add('card');
-        const img = document.createElement('img');
-        img.classList.add('animal');
-        let randImg = numarr[i];
-        img.setAttribute('src', `img/${imgarr[randImg]}`);
-        div.append(img);
-        cardsDiv.append(div);
-    }
-};
-
-
-
+//Listen for clicks on added cards - !IN PROGRESS!
+        for(let i = 0; i < card.length; i++){
+            card[i].addEventListener('click', function(){
+                card[i].classList.toggle('card');
+                animal[i].classList.toggle('animalOn');
+                animal[i].parentElement.classList.toggle('unclick');
+            })
+        };
 
