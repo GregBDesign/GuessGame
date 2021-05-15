@@ -38,7 +38,7 @@ const imgArr = ['bear.png',
 let nums = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
 
 let shuffle = (arr) => {
-    for(let i = arr.length - 1; i >= 1; i -= 1){
+    for(let i = arr.length - 1; i >= 1; i--){
         let j = Math.floor(Math.random() * (i + 1));
         let temp = arr[i];
         arr[i] = arr[j];
@@ -93,20 +93,11 @@ const cardReset = () => {
         }
     }, 1000)
 };
-
-//TO DO - level functionality
-//make the divs depending on which level is selected
-//Use .slice to create an array
-//Change the level1,2,3 etc to an object?
-//Find a way to add an eventlistener 
-//seperate functions into different file
-
-//Level 1 loaded as the default when page opens
-// window.onload = level1();
-
+//Created cards once level is selected
 const card = document.querySelectorAll('.card');
 const animal = document.querySelectorAll('.animal');
 
+//Create the number of cards depending on the level selected
 const createCards = (numarr, imgarr) => {
     for(let i = 0; i < numarr.length; i++){
         const div = document.createElement('div');
@@ -120,6 +111,7 @@ const createCards = (numarr, imgarr) => {
     }
 };
 
+//Level selector
 const levelSelect = (lvlSelect) => {
     if(lvlSelect.value === '1'){
         level1();
@@ -132,6 +124,7 @@ const levelSelect = (lvlSelect) => {
     }
 }
 
+//Level functions
 const level1 = () => {
     const lvl1arr = nums.slice(0,4);
     const lvl1img = imgArr.slice(0,4);
@@ -160,12 +153,19 @@ const level4 = () => {
     createCards(lvl4arr, lvl4img);
 }
 
-//Listen for clicks on added cards - !IN PROGRESS!
-        for(let i = 0; i < card.length; i++){
-            card[i].addEventListener('click', function(){
-                card[i].classList.toggle('card');
-                animal[i].classList.toggle('animalOn');
-                animal[i].parentElement.classList.toggle('unclick');
-            })
-        };
+//Listen for clicks on added cards
+cardsDiv.addEventListener('click', function(event){
+    if(event.target.classList.contains('card')){
+        event.target.children[0].classList.toggle('animalOn');
+        event.target.classList.toggle('card');
+        event.target.classList.toggle('unclick');
+    }
+});
 
+//Level 1 loaded as the default when page opens
+window.onload = level1();
+
+//TO DO - level functionality
+//Change the level1,2,3 etc to an object?
+//seperate functions into different file
+//Add the rest of the game function to the code
