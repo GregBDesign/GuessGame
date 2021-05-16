@@ -46,53 +46,6 @@ let shuffle = (arr) => {
     }
 }
 
-//Check the two cards when both answers are added to the array
-const answerCheck = () => {
-    if(guessArr.length === 2){
-        if(guessArr[0].src === guessArr[1].src){
-            for(let i = 0; i < guessArr.length; i++){
-                guessArr[i].classList.add('correctAnimal');
-                guessArr[i].classList.remove('card');
-                guessArr[i].classList.remove('animalOn');
-                guessArr[i].parentElement.classList.add('unclick');
-            }
-            correct();
-        } else {
-            incorrect();
-        }
-    }
-};
-
-//If the two cards match
-const correct = () => {
-    playerScore++;
-    score.textContent = playerScore;
-    display.textContent = 'Correct!';
-    guessArr.splice(0);
-};
-
-//If the two cards don't match
-const incorrect = () => {
-    playerAttempt++;
-    attempt.textContent = playerAttempt;
-    display.textContent = "Incorrect - Guess again!";
-    cardReset();
-    guessArr.splice(0);
-};
-
-//Reset the cards
-const cardReset = () => {
-    setTimeout(function() {
-        for(let i = 0; i < animal.length; i++){
-            if(animal[i].classList.contains('animalOn')){
-                animal[i].classList.toggle('animalOn');
-                card[i].classList.toggle('card');
-                animal[i].parentElement.classList.toggle('unclick');
-            }
-        display.textContent = "";
-        }
-    }, 1000)
-};
 //Created cards once level is selected
 const card = document.querySelectorAll('.card');
 const animal = document.querySelectorAll('.animal');
@@ -159,13 +112,69 @@ cardsDiv.addEventListener('click', function(event){
         event.target.children[0].classList.toggle('animalOn');
         event.target.classList.toggle('card');
         event.target.classList.toggle('unclick');
+        console.log(guessArr.push(event.target.children[0]));
+        answerCheck();
     }
 });
 
 //Level 1 loaded as the default when page opens
 window.onload = level1();
 
+//Check the two cards when both answers are added to the array
+const answerCheck = () => {
+    if(guessArr.length === 2){
+        if(guessArr[0].src === guessArr[1].src){
+            for(let i = 0; i < guessArr.length; i++){
+                guessArr[i].classList.add('correctAnimal');
+                guessArr[i].classList.remove('card');
+                guessArr[i].classList.remove('animalOn');
+                guessArr[i].parentElement.classList.add('unclick');
+            }
+            correct();
+        } else {
+            incorrect();
+        }
+    }
+};
+
+//If the two cards match
+const correct = () => {
+    playerScore++;
+    score.textContent = playerScore;
+    display.textContent = 'Correct!';
+    guessArr.splice(0);
+};
+
+//If the two cards don't match
+const incorrect = () => {
+    playerAttempt++;
+    attempt.textContent = playerAttempt;
+    display.textContent = "Incorrect - Guess again!";
+    cardReset();
+    guessArr.splice(0);
+};
+
+//Reset the cards - SORT THIS OUT!
+const cardReset = () => {
+    setTimeout(function() {
+        for(let i = 0; i < guessArr.length; i++){
+            //I don't think this needs the if statement as the guessArr is cleared after each turn anyway
+            // Use the below as reference to update this function
+            // event.target.children[0].classList.toggle('animalOn');
+            // event.target.classList.toggle('card');
+            // event.target.classList.toggle('unclick');
+            if(guessArr[i].classList.contains('animalOn')){
+                guessArr[i].classList.toggle('animalOn');
+                guessArr[i].classList.toggle('card');
+                guessArr[i].parentElement.classList.toggle('unclick');
+            }
+        display.textContent = "";
+        }
+    }, 1000)
+};
+
 //TO DO - level functionality
 //Change the level1,2,3 etc to an object?
 //seperate functions into different file
 //Add the rest of the game function to the code
+
