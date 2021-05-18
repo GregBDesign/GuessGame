@@ -1,9 +1,28 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    width: 80%;
+    margin: 0 auto;
+    background-color: #B3EFFF;
+    color: #1C304A;
+}
+
+.display {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
 img {
     margin: 0 auto;
 }
 
+select {
+    color: #1C304A;
+}
+
 .cards {
     margin: 0 auto;
+    padding: 50px;
     width: 70%;
     display: grid;
     grid-template-columns: 20% 20% 20% 20%;
@@ -14,7 +33,7 @@ img {
     height: 150px;
     width: 150px;
     margin: 10px;
-    background-color: rgba(0, 255, 0, 1.0);
+    background-color:  #1c2527;
 }
 
 .animal {
@@ -25,13 +44,14 @@ img {
     height: 150px;
     width: auto;
     display: inline;
+    background-color: #B3EFFF;
 }
 
 .correctAnimal {
     height: 150px;
     width: auto;
     display: inline;
-    background-color: white;
+    background-color: #B3EFFF;
     pointer-events: none;
 }
 
@@ -41,3 +61,5 @@ img {
 
 /* To do:
 centre images
+centre squares
+*/

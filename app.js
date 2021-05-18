@@ -13,6 +13,8 @@ let playerAttempt = 0;
 select.addEventListener('change', function(){
     clearCurrLevel();
     levelSelect(levels);
+    score.textContent = 0;
+    attempt.textContent = 0;
 })
 
 //Clears current level cards
@@ -112,7 +114,7 @@ cardsDiv.addEventListener('click', function(event){
         event.target.children[0].classList.toggle('animalOn');
         event.target.classList.toggle('card');
         event.target.classList.toggle('unclick');
-        console.log(guessArr.push(event.target.children[0]));
+        guessArr.push(event.target.children[0]);
         answerCheck();
     }
 });
@@ -151,30 +153,19 @@ const incorrect = () => {
     attempt.textContent = playerAttempt;
     display.textContent = "Incorrect - Guess again!";
     cardReset();
-    guessArr.splice(0);
 };
 
-//Reset the cards - SORT THIS OUT!
+//Reset the cards
 const cardReset = () => {
     setTimeout(function() {
         for(let i = 0; i < guessArr.length; i++){
-            //I don't think this needs the if statement as the guessArr is cleared after each turn anyway
-            // Use the below as reference to update this function
-            // event.target.children[0].classList.toggle('animalOn');
-            // event.target.classList.toggle('card');
-            // event.target.classList.toggle('unclick');
-            if(guessArr[i].classList.contains('animalOn')){
-                guessArr[i].classList.toggle('animalOn');
-                guessArr[i].classList.toggle('card');
-                guessArr[i].parentElement.classList.toggle('unclick');
-            }
-        display.textContent = "";
+            guessArr[i].classList.toggle('animalOn');
+            guessArr[i].parentNode.classList.toggle('card');
+            guessArr[i].parentNode.classList.toggle('unclick');
         }
+        guessArr.splice(0);
+        display.textContent = "";
     }, 1000)
 };
 
-//TO DO - level functionality
-//Change the level1,2,3 etc to an object?
-//seperate functions into different file
-//Add the rest of the game function to the code
-
+//Check if player has won - TO DO
