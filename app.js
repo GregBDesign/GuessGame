@@ -169,3 +169,4 @@ const cardReset = () => {
 };
 
 //Check if player has won - TO DO
+//loop over cardsDiv.children[i].classList[0] and set a param to true, if true, game over!
