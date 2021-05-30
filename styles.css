@@ -1,10 +1,23 @@
-img {
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    width: 80%;
     margin: 0 auto;
+    background-color: #B3EFFF;
+    color: #1C304A;
+}
+
+.display {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+select {
+    color: #1C304A;
 }
 
 .cards {
-    margin: 0 auto;
-    width: 70%;
+    padding: 50px;
     display: grid;
     grid-template-columns: 20% 20% 20% 20%;
     grid-gap: 5%;
@@ -14,7 +27,8 @@ img {
     height: 150px;
     width: 150px;
     margin: 10px;
-    background-color: rgba(0, 255, 0, 1.0);
+    background-color:  #1c2527;
+    justify-self: center;
 }
 
 .animal {
@@ -24,20 +38,20 @@ img {
 .animalOn {
     height: 150px;
     width: auto;
-    display: inline;
+    display: block;
+    background-color: #B3EFFF;
+    margin: 0 auto;
 }
 
 .correctAnimal {
     height: 150px;
     width: auto;
-    display: inline;
-    background-color: white;
+    display: block;
+    background-color: #B3EFFF;
     pointer-events: none;
+    margin: 0 auto;
 }
 
 .unclick {
     pointer-events: none;
 }
-
-/* To do:
-centre images
